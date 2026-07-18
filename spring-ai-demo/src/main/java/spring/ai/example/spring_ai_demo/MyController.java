@@ -24,23 +24,14 @@ public class MyController {
         }
 
         @GetMapping("/ask")
-        public String ask(
-                        @RequestParam String question) {
-
+        public String ask(@RequestParam String question) {
                 List<Document> docs = vectorStore.similaritySearch(question);
 
-                System.out.println("Documents found: " + docs.size());
-
-                docs.forEach(d -> {
-                        System.out.println("--------------------");
-                        System.out.println(d.getText());
-                });
                 String context = docs.stream()
                                 .map(Document::getText)
                                 .collect(Collectors.joining("\n"));
 
                 return chatClient.prompt()
-
                                 .system("""
                                                 Answer ONLY from the supplied context.
                                                 If the answer isn't present,
