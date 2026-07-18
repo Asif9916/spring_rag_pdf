@@ -34,7 +34,6 @@ public class PdfLoader {
 
         List<Document> chunks = splitter.apply(docs);
 
-        // vectorStore.add(chunks);
         vectorStore.add(chunks);
 
         System.out.println("Loaded " + chunks.size() + " chunks ");
